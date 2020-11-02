@@ -6,8 +6,6 @@ public class TennisGame1 implements TennisGame {
     private int pointsPlayer1 = 0;
     private int pointsPlayer2 = 0;
 
-    private final static String[] SCORES = {"Love", "Fifteen", "Thirty", "Forty"};
-
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
@@ -33,11 +31,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getRegularScore() {
-        return lookupScore(pointsPlayer1) + "-" + lookupScore(pointsPlayer2);
-    }
-
-    private String lookupScore(int points) {
-        return SCORES[points];
+        return Scores.getRegularScore(pointsPlayer1, pointsPlayer2);
     }
 
     private String getAdvantageOrWinScore() {
