@@ -31,30 +31,22 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getRegularScore() {
-        String score = "";
-        int tempScore;
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = pointsPlayer1;
-            else {
-                score += "-";
-                tempScore = pointsPlayer2;
-            }
-            switch (tempScore) {
-                case 0:
-                    score += "Love";
-                    break;
-                case 1:
-                    score += "Fifteen";
-                    break;
-                case 2:
-                    score += "Thirty";
-                    break;
-                case 3:
-                    score += "Forty";
-                    break;
-            }
+        return lookupScore(pointsPlayer1) + "-" + lookupScore(pointsPlayer2);
+    }
+
+    private String lookupScore(int points) {
+        switch (points) {
+            case 0:
+                return "Love";
+            case 1:
+                return "Fifteen";
+            case 2:
+                return "Thirty";
+            case 3:
+                return "Forty";
+            default:
+                return "";
         }
-        return score;
     }
 
     private String getAdvantageOrWinScore() {
