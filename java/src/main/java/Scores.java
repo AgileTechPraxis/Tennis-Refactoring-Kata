@@ -11,4 +11,17 @@ class Scores {
         }
         return "Deuce";
     }
+
+    public static String getAdvantageOrWinScore(int pointsDifference) {
+        if (pointsDifference == 1) {
+            return "Advantage player1";
+        }
+        if (pointsDifference == -1) {
+            return "Advantage player2";
+        }
+        if (pointsDifference >= 2) {
+            return "Win for player1";
+        }
+        return "Win for player2";
+    }
 }

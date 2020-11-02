@@ -25,7 +25,7 @@ public class TennisGame1 implements TennisGame {
             return Scores.getEqualScore(pointsPlayer1);
         }
         if (anyPlayerHasAtLeastFourPoints()) {
-            return getAdvantageOrWinScore();
+            return Scores.getAdvantageOrWinScore(pointsPlayer1 - pointsPlayer2);
         }
         return getRegularScore();
     }
@@ -40,20 +40,6 @@ public class TennisGame1 implements TennisGame {
 
     private String getRegularScore() {
         return Scores.getRegularScore(pointsPlayer1, pointsPlayer2);
-    }
-
-    private String getAdvantageOrWinScore() {
-        int minusResult = pointsPlayer1 - pointsPlayer2;
-        if (minusResult == 1) {
-            return "Advantage player1";
-        }
-        if (minusResult == -1) {
-            return "Advantage player2";
-        }
-        if (minusResult >= 2) {
-            return "Win for player1";
-        }
-        return "Win for player2";
     }
 
 }
