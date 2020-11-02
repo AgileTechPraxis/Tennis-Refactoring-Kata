@@ -25,13 +25,9 @@ public class TennisGame1 implements TennisGame {
         int tempScore = 0;
         if (pointsPlayer1 == pointsPlayer2) {
             return getEqualScore();
-
-        } else if (pointsPlayer1 >= 4 || pointsPlayer2 >= 4) {
-            int minusResult = pointsPlayer1 - pointsPlayer2;
-            if (minusResult == 1) score = "Advantage player1";
-            else if (minusResult == -1) score = "Advantage player2";
-            else if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
+        }
+        if (pointsPlayer1 >= 4 || pointsPlayer2 >= 4) {
+            return getAdvantageOrWinScore();
         } else {
             for (int i = 1; i < 3; i++) {
                 if (i == 1) tempScore = pointsPlayer1;
@@ -56,6 +52,20 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score;
+    }
+
+    private String getAdvantageOrWinScore() {
+        int minusResult = pointsPlayer1 - pointsPlayer2;
+        if (minusResult == 1) {
+            return "Advantage player1";
+        }
+        if (minusResult == -1) {
+            return "Advantage player2";
+        }
+        if (minusResult >= 2) {
+            return "Win for player1";
+        }
+        return "Win for player2";
     }
 
     private String getEqualScore() {
