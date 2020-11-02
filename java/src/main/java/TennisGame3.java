@@ -19,11 +19,19 @@ public class TennisGame3 implements TennisGame {
                     ? SCORES[player1Points] + "-All"
                     : SCORES[player1Points] + "-" + SCORES[player2Points];
         }
-        if (player1Points == player2Points) {
+        if (scoreIsDeuce()) {
             return "Deuce";
         }
-        final String playerName = player1Points > player2Points ? player1Name : player2Name;
-        return ((player1Points - player2Points) * (player1Points - player2Points) == 1) ? "Advantage " + playerName : "Win for " + playerName;
+        final String leadingPlayerName = player1Points > player2Points
+                ? player1Name
+                : player2Name;
+        return ((player1Points - player2Points) * (player1Points - player2Points) == 1)
+                ? "Advantage " + leadingPlayerName
+                : "Win for " + leadingPlayerName;
+    }
+
+    private boolean scoreIsDeuce() {
+        return player1Points == player2Points;
     }
 
     private boolean scoreIsBelowDeuce() {
