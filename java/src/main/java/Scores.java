@@ -24,22 +24,4 @@ class Scores {
         }
         return "Win for player2";
     }
-
-    public static String getScore(int pointsPlayer1, int pointsPlayer2) {
-        if (playersHaveSamePoints(pointsPlayer1, pointsPlayer2)) {
-            return Scores.getEqualScore(pointsPlayer1);
-        }
-        if (anyPlayerHasAtLeastFourPoints(pointsPlayer1, pointsPlayer2)) {
-            return Scores.getAdvantageOrWinScore(pointsPlayer1 - pointsPlayer2);
-        }
-        return Scores.getRegularScore(pointsPlayer1, pointsPlayer2);
-    }
-
-    private static boolean anyPlayerHasAtLeastFourPoints(int pointsPlayer1, int pointsPlayer2) {
-        return pointsPlayer1 >= 4 || pointsPlayer2 >= 4;
-    }
-
-    private static boolean playersHaveSamePoints(int pointsPlayer1, int pointsPlayer2) {
-        return pointsPlayer1 == pointsPlayer2;
-    }
 }
