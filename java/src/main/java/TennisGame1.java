@@ -27,7 +27,7 @@ public class TennisGame1 implements TennisGame {
         if (anyPlayerHasAtLeastFourPoints()) {
             return Scores.getAdvantageOrWinScore(pointsPlayer1 - pointsPlayer2);
         }
-        return getRegularScore();
+        return Scores.getRegularScore(pointsPlayer1, pointsPlayer2);
     }
 
     private boolean anyPlayerHasAtLeastFourPoints() {
@@ -37,9 +37,4 @@ public class TennisGame1 implements TennisGame {
     private boolean playersHaveSamePoints() {
         return pointsPlayer1 == pointsPlayer2;
     }
-
-    private String getRegularScore() {
-        return Scores.getRegularScore(pointsPlayer1, pointsPlayer2);
-    }
-
 }
