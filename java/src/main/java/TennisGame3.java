@@ -1,5 +1,7 @@
 public class TennisGame3 implements TennisGame {
 
+    private static final String[] SCORES = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+
     private final String player1Name;
     private final String player2Name;
 
@@ -12,16 +14,20 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
-        if (player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6)) {
-            String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
-            final String score = p[player1Points];
-            return (player1Points == player2Points) ? score + "-All" : score + "-" + p[player2Points];
+        if (scoreIsBelowDeuce()) {
+            return (player1Points == player2Points)
+                    ? SCORES[player1Points] + "-All"
+                    : SCORES[player1Points] + "-" + SCORES[player2Points];
         }
         if (player1Points == player2Points) {
             return "Deuce";
         }
         final String playerName = player1Points > player2Points ? player1Name : player2Name;
-        return ((player1Points - player2Points)*(player1Points - player2Points) == 1) ? "Advantage " + playerName : "Win for " + playerName;
+        return ((player1Points - player2Points) * (player1Points - player2Points) == 1) ? "Advantage " + playerName : "Win for " + playerName;
+    }
+
+    private boolean scoreIsBelowDeuce() {
+        return player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6);
     }
 
     public void wonPoint(String playerName) {
