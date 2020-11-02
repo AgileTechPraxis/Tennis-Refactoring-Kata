@@ -21,13 +21,21 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        if (pointsPlayer1 == pointsPlayer2) {
-            return getEqualScore();
+        if (playersHaveSamePoints()) {
+            return Scores.getEqualScore(pointsPlayer1);
         }
-        if (pointsPlayer1 >= 4 || pointsPlayer2 >= 4) {
+        if (anyPlayerHasAtLeastFourPoints()) {
             return getAdvantageOrWinScore();
         }
         return getRegularScore();
+    }
+
+    private boolean anyPlayerHasAtLeastFourPoints() {
+        return pointsPlayer1 >= 4 || pointsPlayer2 >= 4;
+    }
+
+    private boolean playersHaveSamePoints() {
+        return pointsPlayer1 == pointsPlayer2;
     }
 
     private String getRegularScore() {
@@ -48,16 +56,4 @@ public class TennisGame1 implements TennisGame {
         return "Win for player2";
     }
 
-    private String getEqualScore() {
-        switch (pointsPlayer1) {
-            case 0:
-                return "Love-All";
-            case 1:
-                return "Fifteen-All";
-            case 2:
-                return "Thirty-All";
-            default:
-                return "Deuce";
-        }
-    }
 }
