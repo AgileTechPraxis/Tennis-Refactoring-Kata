@@ -1,98 +1,75 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class TennisGame1 implements TennisGame {
 
-    private static final Map<Integer, String> scoreDictionary = new HashMap<>() {{
-        put(0, "Love");
-        put(1, "Fifteen");
-        put(2, "Thirty");
-        put(3, "Forty");
-    }};
+    private int m_score1 = 0;
+    private int m_score2 = 0;
+    private String player1Name;
+    private String player2Name;
 
-    private static final String DEUCE = "Deuce";
-    private static final Map<Integer, String> tieDictionary = new HashMap<>() {{
-        put(0, "Love-All");
-        put(1, "Fifteen-All");
-        put(2, "Thirty-All");
-        put(3, DEUCE);
-    }};
-
-    private static final String PLAYER_1 = "player1";
-    private static final String PLAYER_2 = "player2";
-    private static final String WIN_FOR = "Win for ";
-    private static final String ADVANTAGE = "Advantage ";
-    private int scorePlayer1 = 0;
-    private int scorePlayer2 = 0;
+    public TennisGame1(String player1Name, String player2Name) {
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
+    }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals(PLAYER_1)) {
-            scorePlayer1 += 1;
-            return;
-        }
-        scorePlayer2 += 1;
+        if (playerName == "player1")
+            m_score1 += 1;
+        else
+            m_score2 += 1;
     }
 
     public String getScore() {
-        if (isTie()) {
-            return displayTie();
+        String score = "";
+        int tempScore=0;
+        if (m_score1==m_score2)
+        {
+            switch (m_score1)
+            {
+                case 0:
+                    score = "Love-All";
+                    break;
+                case 1:
+                    score = "Fifteen-All";
+                    break;
+                case 2:
+                    score = "Thirty-All";
+                    break;
+                default:
+                    score = "Deuce";
+                    break;
+
+            }
         }
-        if (isAdvantage()) {
-            return displayAdvantage();
+        else if (m_score1>=4 || m_score2>=4)
+        {
+            int minusResult = m_score1-m_score2;
+            if (minusResult==1) score ="Advantage player1";
+            else if (minusResult ==-1) score ="Advantage player2";
+            else if (minusResult>=2) score = "Win for player1";
+            else score ="Win for player2";
         }
-        if (isWin()) {
-            return displayWin();
+        else
+        {
+            for (int i=1; i<3; i++)
+            {
+                if (i==1) tempScore = m_score1;
+                else { score+="-"; tempScore = m_score2;}
+                switch(tempScore)
+                {
+                    case 0:
+                        score+="Love";
+                        break;
+                    case 1:
+                        score+="Fifteen";
+                        break;
+                    case 2:
+                        score+="Thirty";
+                        break;
+                    case 3:
+                        score+="Forty";
+                        break;
+                }
+            }
         }
-
-        return displayRunning();
-    }
-
-    private String displayAdvantage() {
-        if (getScoreDistance() == 1) {
-            return ADVANTAGE + PLAYER_1;
-        }
-        return ADVANTAGE + PLAYER_2;
-    }
-
-    private int getScoreDistance() {
-        return scorePlayer1 - scorePlayer2;
-    }
-
-    private boolean isAdvantage() {
-        return isEitherPlayerAboveForty() && Math.abs(getScoreDistance()) == 1;
-    }
-
-    private boolean isWin() {
-        return isEitherPlayerAboveForty() && Math.abs(getScoreDistance()) > 1;
-    }
-
-    private String displayRunning() {
-        return getScoreString(scorePlayer1) + "-" + getScoreString(scorePlayer2);
-    }
-
-    private String displayWin() {
-        if (getScoreDistance() >= 2) {
-            return WIN_FOR + PLAYER_1;
-        }
-        return WIN_FOR + PLAYER_2;
-    }
-
-    private boolean isEitherPlayerAboveForty() {
-        return scorePlayer1 >= 4 || scorePlayer2 >= 4;
-    }
-
-    private String displayTie() {
-        if (tieDictionary.containsKey(scorePlayer1)) {
-            return tieDictionary.get(scorePlayer1);
-        }
-        return DEUCE;
-    }
-
-    private boolean isTie() {
-        return scorePlayer1 == scorePlayer2;
-    }
-
-    private String getScoreString(int score) {
-        return scoreDictionary.get(score);
+        return score;
     }
 }
