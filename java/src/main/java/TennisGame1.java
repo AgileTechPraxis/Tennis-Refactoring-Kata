@@ -7,8 +7,10 @@ public class TennisGame1 implements TennisGame {
     private static final String FIFTEEN_ALL = "Fifteen-All";
     private static final String THIRTY_ALL = "Thirty-All";
     private static final String DEUCE = "Deuce";
+
     private static final String ADVANTAGE_PLAYER_1 = "Advantage player1";
     private static final String ADVANTAGE_PLAYER_2 = "Advantage player2";
+
     private static final String WIN_FOR_PLAYER_1 = "Win for player1";
     private static final String WIN_FOR_PLAYER_2 = "Win for player2";
 
@@ -77,26 +79,24 @@ public class TennisGame1 implements TennisGame {
     private String inProgressScore() {
         String score = "";
         int tempScore = 0;
+
+        Map<Integer, String> pointToScoreForInProgress = new HashMap<>() {{
+            put(0, "Love");
+            put(1, "Fifteen");
+            put(2, "Thirty");
+            put(3, "Forty");
+        }};
+
         for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = pointsPlayerOne;
+            if (i == 1){
+                tempScore = pointsPlayerOne;
+            }
             else {
                 score += "-";
                 tempScore = pointsPlayerTwo;
             }
-            switch (tempScore) {
-                case 0:
-                    score += "Love";
-                    break;
-                case 1:
-                    score += "Fifteen";
-                    break;
-                case 2:
-                    score += "Thirty";
-                    break;
-                case 3:
-                    score += "Forty";
-                    break;
-            }
+
+            score += pointToScoreForInProgress.get(tempScore);
         }
 
         return score;
