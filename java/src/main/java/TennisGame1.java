@@ -19,7 +19,7 @@ public class TennisGame1 implements TennisGame {
         if (playersHaveSamePoints()) {
             return scoreForTie();
         }
-        if (pointsPlayerOne >= 4 || pointsPlayerTwo >= 4) {
+        if (onePlayerHasMoreThan3Points()) {
             int minusResult = pointsPlayerOne - pointsPlayerTwo;
             if (minusResult == 1) {
                 score = "Advantage player1";
@@ -56,6 +56,10 @@ public class TennisGame1 implements TennisGame {
         }
 
         return score;
+    }
+
+    private boolean onePlayerHasMoreThan3Points() {
+        return pointsPlayerOne >= 4 || pointsPlayerTwo >= 4;
     }
 
     private String scoreForTie() {
