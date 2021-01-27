@@ -16,23 +16,8 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score = "";
         int tempScore = 0;
-        if (pointsPlayerOne == pointsPlayerTwo) {
-            switch (pointsPlayerOne) {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-
-            }
-            return score;
+        if (playersHaveSamePoints()) {
+            return scoreForTie();
         }
         if (pointsPlayerOne >= 4 || pointsPlayerTwo >= 4) {
             int minusResult = pointsPlayerOne - pointsPlayerTwo;
@@ -71,5 +56,28 @@ public class TennisGame1 implements TennisGame {
         }
 
         return score;
+    }
+
+    private String scoreForTie() {
+        String score;
+        switch (pointsPlayerOne) {
+            case 0:
+                score = "Love-All";
+                break;
+            case 1:
+                score = "Fifteen-All";
+                break;
+            case 2:
+                score = "Thirty-All";
+                break;
+            default:
+                score = "Deuce";
+                break;
+        }
+        return score;
+    }
+
+    private boolean playersHaveSamePoints() {
+        return pointsPlayerOne == pointsPlayerTwo;
     }
 }
