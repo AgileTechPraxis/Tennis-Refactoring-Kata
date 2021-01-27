@@ -1,4 +1,13 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class TennisGame1 implements TennisGame {
+
+    private static final Map<Integer, String> POINT_TO_SCORE_FOR_TIE = new HashMap<>(){{
+        put(0, "Love-All");
+        put(1, "Fifteen-All");
+        put(2, "Thirty-All");
+    }};
 
     private int pointsPlayerOne = 0;
     private int pointsPlayerTwo = 0;
@@ -28,22 +37,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String scoreForTie() {
-        String score;
-        switch (pointsPlayerOne) {
-            case 0:
-                score = "Love-All";
-                break;
-            case 1:
-                score = "Fifteen-All";
-                break;
-            case 2:
-                score = "Thirty-All";
-                break;
-            default:
-                score = "Deuce";
-                break;
-        }
-        return score;
+        return POINT_TO_SCORE_FOR_TIE.getOrDefault(pointsPlayerOne, "Deuce");
     }
 
     private boolean onePlayerHasMoreThan3Points() {
