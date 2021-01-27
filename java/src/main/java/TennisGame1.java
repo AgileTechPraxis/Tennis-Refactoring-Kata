@@ -53,12 +53,15 @@ public class TennisGame1 implements TennisGame {
         
         int pointsDifference = pointsPlayerOne - pointsPlayerTwo;
 
-        if (pointsDifference == 1) {
-            return "Advantage player1";
-        } 
-        if (pointsDifference == -1) {
-            return "Advantage player2";
-        }  
+        if(Math.abs(pointsDifference) == 1) {
+            if (pointsDifference == 1) {
+                return "Advantage player1";
+            }
+            if (pointsDifference == -1) {
+                return "Advantage player2";
+            }
+        }
+
         if (pointsDifference >= 2) {
             return "Win for player1";
         } 
