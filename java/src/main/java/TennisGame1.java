@@ -32,12 +32,16 @@ public class TennisGame1 implements TennisGame {
             return scoreForTie();
         }
         if (onePlayerHasMoreThan3Points()) {
-            if(Math.abs(pointsPlayerOne - pointsPlayerTwo) == 1) {
+            if(isAdvantage()) {
                 return scoreForAdvantage();
             }
             return scoreForWin();
         }
         return inProgressScore();
+    }
+
+    private boolean isAdvantage() {
+        return Math.abs(pointsPlayerOne - pointsPlayerTwo) == 1;
     }
 
     private boolean playersHaveSamePoints() {
