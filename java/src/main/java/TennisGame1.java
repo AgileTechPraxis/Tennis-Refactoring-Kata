@@ -20,11 +20,15 @@ public class TennisGame1 implements TennisGame {
         put(2, THIRTY_ALL);
     }};
 
+    public static final String LOVE = "Love";
+    public static final String FIFTEEN = "Fifteen";
+    public static final String THIRTY = "Thirty";
+    public static final String FORTY = "Forty";
     private static final Map<Integer, String> POINT_TO_SCORE_FOR_IN_PROGRESS = new HashMap<>() {{
-        put(0, "Love");
-        put(1, "Fifteen");
-        put(2, "Thirty");
-        put(3, "Forty");
+        put(0, LOVE);
+        put(1, FIFTEEN);
+        put(2, THIRTY);
+        put(3, FORTY);
     }};
 
     private int pointsPlayerOne = 0;
