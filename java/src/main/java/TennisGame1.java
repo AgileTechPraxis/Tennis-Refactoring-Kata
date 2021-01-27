@@ -35,7 +35,7 @@ public class TennisGame1 implements TennisGame {
             if(Math.abs(pointsPlayerOne - pointsPlayerTwo) == 1) {
                 return scoreForAdvantage();
             }
-            return scoreForAdvantageOrWin();
+            return scoreForWin();
         }
         return inProgressScore();
     }
@@ -59,24 +59,11 @@ public class TennisGame1 implements TennisGame {
         return "Advantage player2";
     }
 
-    private String scoreForAdvantageOrWin() {
-        
-        int pointsDifference = pointsPlayerOne - pointsPlayerTwo;
-
-        if(Math.abs(pointsDifference) == 1) {
-            if (pointsDifference == 1) {
-                return "Advantage player1";
-            }
-            if (pointsDifference == -1) {
-                return "Advantage player2";
-            }
-        }
-
-        if (pointsDifference >= 2) {
+    private String scoreForWin() {
+        if (pointsPlayerOne > pointsPlayerTwo) {
             return "Win for player1";
-        } 
+        }
         return "Win for player2";
-        
     }
 
     private String inProgressScore() {
