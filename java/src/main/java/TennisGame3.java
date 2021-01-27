@@ -1,49 +1,35 @@
 public class TennisGame3 implements TennisGame {
 
-    private static final String[] SCORES = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+    private int p2;
+    private int p1;
+    private String p1N;
+    private String p2N;
 
-    private final String player1Name;
-    private final String player2Name;
-
-    private int player1Points;
-    private int player2Points;
-
-    public TennisGame3(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    public TennisGame3(String p1N, String p2N) {
+        this.p1N = p1N;
+        this.p2N = p2N;
     }
 
     public String getScore() {
-        if (scoreIsBelowDeuce()) {
-            return (player1Points == player2Points)
-                    ? SCORES[player1Points] + "-All"
-                    : SCORES[player1Points] + "-" + SCORES[player2Points];
+        String s;
+        if (p1 < 4 && p2 < 4 && !(p1 + p2 == 6)) {
+            String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+            s = p[p1];
+            return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+        } else {
+            if (p1 == p2)
+                return "Deuce";
+            s = p1 > p2 ? p1N : p2N;
+            return ((p1-p2)*(p1-p2) == 1) ? "Advantage " + s : "Win for " + s;
         }
-        if (scoreIsDeuce()) {
-            return "Deuce";
-        }
-        final String leadingPlayerName = player1Points > player2Points
-                ? player1Name
-                : player2Name;
-        return ((player1Points - player2Points) * (player1Points - player2Points) == 1)
-                ? "Advantage " + leadingPlayerName
-                : "Win for " + leadingPlayerName;
-    }
-
-    private boolean scoreIsDeuce() {
-        return player1Points == player2Points;
-    }
-
-    private boolean scoreIsBelowDeuce() {
-        return player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6);
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals("player1")) {
-            this.player1Points += 1;
-            return;
-        }
-        this.player2Points += 1;
+        if (playerName == "player1")
+            this.p1 += 1;
+        else
+            this.p2 += 1;
+
     }
 
 }
