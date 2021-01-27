@@ -8,7 +8,7 @@ public class TennisGame1 implements TennisGame {
     private static final String THIRTY_ALL = "Thirty-All";
     private static final String DEUCE = "Deuce";
 
-    private static final Map<Integer, String> POINT_TO_SCORE_FOR_TIE = new HashMap<>(){{
+    private static final Map<Integer, String> POINT_TO_SCORE_FOR_TIE = new HashMap<>() {{
         put(0, LOVE_ALL);
         put(1, FIFTEEN_ALL);
         put(2, THIRTY_ALL);
@@ -31,13 +31,17 @@ public class TennisGame1 implements TennisGame {
         if (playersHaveSamePoints()) {
             return scoreForTie();
         }
-        if (onePlayerHasMoreThan3Points()) {
-            if(isAdvantage()) {
-                return scoreForAdvantage();
-            }
-            return scoreForWin();
+        if (bothPlayersHaveLessThan4Points()) {
+            return inProgressScore();
         }
-        return inProgressScore();
+        if (isAdvantage()) {
+            return scoreForAdvantage();
+        }
+        return scoreForWin();
+    }
+
+    private boolean bothPlayersHaveLessThan4Points() {
+        return pointsPlayerOne < 4 && pointsPlayerTwo < 4;
     }
 
     private boolean isAdvantage() {
@@ -50,10 +54,6 @@ public class TennisGame1 implements TennisGame {
 
     private String scoreForTie() {
         return POINT_TO_SCORE_FOR_TIE.getOrDefault(pointsPlayerOne, DEUCE);
-    }
-
-    private boolean onePlayerHasMoreThan3Points() {
-        return pointsPlayerOne >= 4 || pointsPlayerTwo >= 4;
     }
 
     private String scoreForAdvantage() {
