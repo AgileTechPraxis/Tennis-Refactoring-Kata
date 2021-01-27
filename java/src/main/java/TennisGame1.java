@@ -20,6 +20,13 @@ public class TennisGame1 implements TennisGame {
         put(2, THIRTY_ALL);
     }};
 
+    private static final Map<Integer, String> POINT_TO_SCORE_FOR_IN_PROGRESS = new HashMap<>() {{
+        put(0, "Love");
+        put(1, "Fifteen");
+        put(2, "Thirty");
+        put(3, "Forty");
+    }};
+
     private int pointsPlayerOne = 0;
     private int pointsPlayerTwo = 0;
 
@@ -77,28 +84,6 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String inProgressScore() {
-        String score = "";
-        int tempScore = 0;
-
-        Map<Integer, String> pointToScoreForInProgress = new HashMap<>() {{
-            put(0, "Love");
-            put(1, "Fifteen");
-            put(2, "Thirty");
-            put(3, "Forty");
-        }};
-
-        for (int i = 1; i < 3; i++) {
-            if (i == 1){
-                tempScore = pointsPlayerOne;
-            }
-            else {
-                score += "-";
-                tempScore = pointsPlayerTwo;
-            }
-
-            score += pointToScoreForInProgress.get(tempScore);
-        }
-
-        return score;
+        return POINT_TO_SCORE_FOR_IN_PROGRESS.get(pointsPlayerOne) + "-" + POINT_TO_SCORE_FOR_IN_PROGRESS.get(pointsPlayerTwo);
     }
 }
