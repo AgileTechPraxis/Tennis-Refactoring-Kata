@@ -3,10 +3,15 @@ import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
 
+    private static final String LOVE_ALL = "Love-All";
+    private static final String FIFTEEN_ALL = "Fifteen-All";
+    private static final String THIRTY_ALL = "Thirty-All";
+    private static final String DEUCE = "Deuce";
+
     private static final Map<Integer, String> POINT_TO_SCORE_FOR_TIE = new HashMap<>(){{
-        put(0, "Love-All");
-        put(1, "Fifteen-All");
-        put(2, "Thirty-All");
+        put(0, LOVE_ALL);
+        put(1, FIFTEEN_ALL);
+        put(2, THIRTY_ALL);
     }};
 
     private int pointsPlayerOne = 0;
@@ -37,7 +42,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String scoreForTie() {
-        return POINT_TO_SCORE_FOR_TIE.getOrDefault(pointsPlayerOne, "Deuce");
+        return POINT_TO_SCORE_FOR_TIE.getOrDefault(pointsPlayerOne, DEUCE);
     }
 
     private boolean onePlayerHasMoreThan3Points() {
