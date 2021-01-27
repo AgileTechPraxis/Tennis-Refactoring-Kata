@@ -14,15 +14,18 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore = 0;
         if (playersHaveSamePoints()) {
             return scoreForTie();
         }
         if (onePlayerHasMoreThan3Points()) {
             return scoreForAdvantageOrWin();
         }
+        return inProgressScore();
+    }
 
+    private String inProgressScore() {
+        String score = "";
+        int tempScore = 0;
         for (int i = 1; i < 3; i++) {
             if (i == 1) tempScore = pointsPlayerOne;
             else {
