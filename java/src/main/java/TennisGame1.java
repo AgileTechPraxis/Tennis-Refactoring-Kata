@@ -7,6 +7,10 @@ public class TennisGame1 implements TennisGame {
     private static final String FIFTEEN_ALL = "Fifteen-All";
     private static final String THIRTY_ALL = "Thirty-All";
     private static final String DEUCE = "Deuce";
+    private static final String ADVANTAGE_PLAYER_1 = "Advantage player1";
+    private static final String ADVANTAGE_PLAYER_2 = "Advantage player2";
+    private static final String WIN_FOR_PLAYER_1 = "Win for player1";
+    private static final String WIN_FOR_PLAYER_2 = "Win for player2";
 
     private static final Map<Integer, String> POINT_TO_SCORE_FOR_TIE = new HashMap<>() {{
         put(0, LOVE_ALL);
@@ -58,16 +62,16 @@ public class TennisGame1 implements TennisGame {
 
     private String scoreForAdvantage() {
         if (pointsPlayerOne > pointsPlayerTwo) {
-            return "Advantage player1";
+            return ADVANTAGE_PLAYER_1;
         }
-        return "Advantage player2";
+        return ADVANTAGE_PLAYER_2;
     }
 
     private String scoreForWin() {
         if (pointsPlayerOne > pointsPlayerTwo) {
-            return "Win for player1";
+            return WIN_FOR_PLAYER_1;
         }
-        return "Win for player2";
+        return WIN_FOR_PLAYER_2;
     }
 
     private String inProgressScore() {
